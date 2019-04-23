@@ -5,17 +5,17 @@
   o <- 6                #oczka
   x <- 100000           #liczba powtorzen
   i <- 0                #licznik do petli
-  wynik_hiv_5   <- c(0)
-  wynik_hiv_10  <- c(0)
-  wynik_hiv_20  <- c(0)
-  wynik_hiv_30  <- c(0)
-  wynik_hiv_40  <- c(0)
-  wynik_hiv_50  <- c(0)
-  wynik_hiv_60  <- c(0)
-  wynik_hiv_70  <- c(0)
-  wynik_hiv_80  <- c(0)
-  wynik_hiv_90  <- c(0)
-  wynik_hiv_100 <- c(0)
+  wynik_5   <- c(0)
+  wynik_10  <- c(0)
+  wynik_20  <- c(0)
+  wynik_30  <- c(0)
+  wynik_40  <- c(0)
+  wynik_50  <- c(0)
+  wynik_60  <- c(0)
+  wynik_70  <- c(0)
+  wynik_80  <- c(0)
+  wynik_90  <- c(0)
+  wynik_100 <- c(0)
   prawd <- rep(1/6, 6)  #prawdopodobienstwa oczek
   #prawd <- c(1/6, 1/6, 1/3, 1/8, 1/9, 7/72)
 }
@@ -53,7 +53,7 @@ losowanko <- function(liczba_losowan, liczba_kostek, dice)
 }
 
 #chisq.test
-test_na_hiv <- function(to_co_wylosowalo, prawdopodobienstwo)
+test_chi <- function(to_co_wylosowalo, prawdopodobienstwo)
 {
   return(chisq.test(to_co_wylosowalo, p = prawdopodobienstwo)$p.value)
 }
@@ -126,22 +126,22 @@ do_wykresu <- function(l_5, L_10, L_20, L_30, L_40, L_50, L_60, L_70, L_80, L_90
 #nasze rzuty
 while (i < x)
 {
-  wynik_hiv_5   <- c(wynik_hiv_5,   test_na_hiv(losowanko(5,   1, seq(1, o)), p = prawd))
-  wynik_hiv_10  <- c(wynik_hiv_10,  test_na_hiv(losowanko(10,  1, seq(1, o)), p = prawd))
-  wynik_hiv_20  <- c(wynik_hiv_20,  test_na_hiv(losowanko(20,  1, seq(1, o)), p = prawd))
-  wynik_hiv_30  <- c(wynik_hiv_30,  test_na_hiv(losowanko(30,  1, seq(1, o)), p = prawd))
-  wynik_hiv_40  <- c(wynik_hiv_40,  test_na_hiv(losowanko(40,  1, seq(1, o)), p = prawd))
-  wynik_hiv_50  <- c(wynik_hiv_50,  test_na_hiv(losowanko(50,  1, seq(1, o)), p = prawd))
-  wynik_hiv_60  <- c(wynik_hiv_60,  test_na_hiv(losowanko(60,  1, seq(1, o)), p = prawd))
-  wynik_hiv_70  <- c(wynik_hiv_70,  test_na_hiv(losowanko(70,  1, seq(1, o)), p = prawd))
-  wynik_hiv_80  <- c(wynik_hiv_80,  test_na_hiv(losowanko(80,  1, seq(1, o)), p = prawd))
-  wynik_hiv_90  <- c(wynik_hiv_90,  test_na_hiv(losowanko(90,  1, seq(1, o)), p = prawd))
-  wynik_hiv_100 <- c(wynik_hiv_100, test_na_hiv(losowanko(100, 1, seq(1, o)), p = prawd))
+  wynik_5   <- c(wynik_5,   test_chi(losowanko(5,   1, seq(1, o)), p = prawd))
+  wynik_10  <- c(wynik_10,  test_chi(losowanko(10,  1, seq(1, o)), p = prawd))
+  wynik_20  <- c(wynik_20,  test_chi(losowanko(20,  1, seq(1, o)), p = prawd))
+  wynik_30  <- c(wynik_30,  test_chi(losowanko(30,  1, seq(1, o)), p = prawd))
+  wynik_40  <- c(wynik_40,  test_chi(losowanko(40,  1, seq(1, o)), p = prawd))
+  wynik_50  <- c(wynik_50,  test_chi(losowanko(50,  1, seq(1, o)), p = prawd))
+  wynik_60  <- c(wynik_60,  test_chi(losowanko(60,  1, seq(1, o)), p = prawd))
+  wynik_70  <- c(wynik_70,  test_chi(losowanko(70,  1, seq(1, o)), p = prawd))
+  wynik_80  <- c(wynik_80,  test_chi(losowanko(80,  1, seq(1, o)), p = prawd))
+  wynik_90  <- c(wynik_90,  test_chi(losowanko(90,  1, seq(1, o)), p = prawd))
+  wynik_100 <- c(wynik_100, test_chi(losowanko(100, 1, seq(1, o)), p = prawd))
   i <- i + 1 
 }
 
-wykresik <- do_wykresu(wynik_hiv_5, wynik_hiv_10, wynik_hiv_20, wynik_hiv_30, wynik_hiv_40, wynik_hiv_50,
-                       wynik_hiv_60, wynik_hiv_70, wynik_hiv_80, wynik_hiv_90, wynik_hiv_100, x)
+wykresik <- do_wykresu(wynik_5, wynik_10, wynik_20, wynik_30, wynik_40, wynik_50,
+                       wynik_60, wynik_70, wynik_80, wynik_90, wynik_100, x)
 
 plot(c(5, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100), wykresik, col = 'red',
      xlab = 'liczba rzutow', ylab = 'wynik chisq.testu', pch = 3, type = 'b')
